@@ -1,9 +1,9 @@
 # MITE113 — Laravel Lab Activities 1 & 2
 
-Coursework by **Judy Ann P. Flores**.
+Coursework by Judy Ann P. Flores.
 
-A Laravel 12 project demonstrating the **Route → Controller → View** flow and a
-**MySQL + Eloquent** data layer, styled with Tailwind CSS v4.
+A Laravel 12 project demonstrating the Route → Controller → View flow and a
+MySQL + Eloquent data layer, styled with Tailwind CSS v4.
 
 ## Lab Activity 1 — Student Profile Page
 
@@ -37,7 +37,7 @@ Student profiles are stored in MySQL rather than a temporary PHP array.
 | `year_level` | |
 | `created_at` / `updated_at` | timestamps |
 
-Records are created and queried with **Laravel Tinker**, keeping the focus on
+Records are created and queried with Laravel Tinker, keeping the focus on
 migrations and Eloquent rather than forms.
 
 ```php

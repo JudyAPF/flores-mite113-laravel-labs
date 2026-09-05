@@ -18,7 +18,7 @@ class ProfileController extends Controller
             'name'        => 'Judy Ann P. Flores',
             'program'     => 'BSIT',
             'year_level'  => '3rd Year',
-            'skills'      => ['Laravel & PHP', 'MySQL Database Design', 'Tailwind CSS'],
+            'skills'      => ['Laravel & PHP', 'MySQL', 'Tailwind CSS', 'Java', 'Python', 'Flutter', 'Figma'],
             'career_goal' => 'To become a full-stack web developer who builds clean, '
                            . 'reliable systems that make everyday work easier for people.',
         ];
