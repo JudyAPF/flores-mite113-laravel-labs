@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Route;
 | GET /profile  ->  ProfileController@show  ->  resources/views/profile.blade.php
 | The route is NAMED "profile.show" so we can link to it with route('profile.show').
 */
-Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::redirect('/', '/profile');   // keeps the root working
 
 /*
 |--------------------------------------------------------------------------
