@@ -20,6 +20,17 @@
 
         <dl class="grid gap-4 px-8 py-8 sm:grid-cols-2">
             <div class="rounded-xl bg-mystic p-4">
+                <dt class="text-xs font-semibold uppercase tracking-wider text-ship-cove">Student Number</dt>
+                <dd class="mt-1 text-lg font-semibold">
+                    @if ($student->student_number)
+                        {{ $student->student_number }}
+                    @else
+                        <span class="font-normal text-ship-cove">Not assigned</span>
+                    @endif
+                </dd>
+            </div>
+
+            <div class="rounded-xl bg-mystic p-4">
                 <dt class="text-xs font-semibold uppercase tracking-wider text-ship-cove">Name</dt>
                 <dd class="mt-1 text-lg font-semibold">{{ $student->name }}</dd>
             </div>
@@ -27,6 +38,11 @@
             <div class="rounded-xl bg-mystic p-4">
                 <dt class="text-xs font-semibold uppercase tracking-wider text-ship-cove">Email</dt>
                 <dd class="mt-1 break-all text-lg font-semibold">{{ $student->email }}</dd>
+            </div>
+
+            <div class="rounded-xl bg-mystic p-4">
+                <dt class="text-xs font-semibold uppercase tracking-wider text-ship-cove">Year Level</dt>
+                <dd class="mt-1 text-lg font-semibold">{{ $student->year_level }}</dd>
             </div>
 
             {{-- Reached through the belongsTo relationship, not a column on students. --}}
