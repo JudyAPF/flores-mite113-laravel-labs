@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Student extends Model
 {
@@ -16,9 +17,19 @@ class Student extends Model
      */
     protected $fillable = [
         'student_number',
+        'course_id',
         'name',
         'email',
-        'program',
         'year_level',
     ];
+
+    /**
+     * The other half of Course::students().
+     * $student->course returns the Course this student belongs to,
+     * or null while the student has no course set.
+     */
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

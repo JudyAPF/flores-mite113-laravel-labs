@@ -21,6 +21,9 @@ class ProfileController extends Controller
             'skills'      => ['Laravel & PHP', 'MySQL', 'Tailwind CSS', 'Java', 'Python', 'Flutter', 'Figma'],
             'career_goal' => 'To become a full-stack web developer who builds clean, '
                            . 'reliable systems that make everyday work easier for people.',
+            // Lab 1 reads no database, so there is no students row to link to.
+            // The view uses this to decide whether to show the record button.
+            'studentId'   => null,
         ];
 
         // Pass the data to resources/views/profile.blade.php
@@ -37,12 +40,17 @@ class ProfileController extends Controller
     public function showByName(string $name)
     {
         // Eloquent query. firstOrFail() shows a 404 page if nobody matches.
-        $student = Student::where('name', $name)->firstOrFail();
+        $student = Student::with('course')->where('name', $name)->firstOrFail();
 
         return view('profile', [
+            // This profile IS a students row, so the view can link to its
+            // CRUD detail page at /students/{id}.
+            'studentId'   => $student->id,
             'name'        => $student->name,
-            'program'     => $student->program,
-            'year_level'  => $student->year_level,
+            // The program is no longer a column on students - it now lives in
+            // the related courses row, reached through the belongsTo relationship.
+            'program'     => $student->course?->code ?? 'Not enrolled',
+            'year_level'  => $student->year_level ?? 'Not set',
             'skills'      => ['Laravel & PHP', 'MySQL Database Design', 'Tailwind CSS'],
             'career_goal' => 'To become a full-stack web developer who builds clean, '
                            . 'reliable systems that make everyday work easier for people.',

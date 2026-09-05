@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(CourseSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // firstOrCreate keeps `php artisan db:seed` safe to run more than once.
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            User::factory()->raw(['name' => 'Test User', 'email' => 'test@example.com'])
+        );
     }
 }
