@@ -12,7 +12,6 @@
         </p>
     </div>
 
-
     <div class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-lucky-point/10">
         <ul class="divide-y divide-mystic">
             @forelse ($students as $student)

@@ -17,6 +17,19 @@
 
 <div class="grid gap-5 sm:grid-cols-2">
 
+    {{-- Student number --}}
+    <div>
+        <label for="student_number" class="block text-xs font-semibold uppercase tracking-wider text-ship-cove">
+            Student Number
+        </label>
+        <input type="text" name="student_number" id="student_number"
+               value="{{ old('student_number', $student->student_number) }}"
+               required autofocus placeholder="e.g. 2026-00123"
+               class="mt-2 w-full rounded-lg border border-cornflower bg-white px-4 py-2.5 text-lucky-point
+                      placeholder:text-ship-cove/60 focus:border-lucky-point focus:outline-none
+                      focus:ring-2 focus:ring-cornflower">
+    </div>
+
     {{-- Name --}}
     <div>
         <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-ship-cove">
@@ -24,7 +37,7 @@
         </label>
         <input type="text" name="name" id="name"
                value="{{ old('name', $student->name) }}"
-               required autofocus
+               required
                class="mt-2 w-full rounded-lg border border-cornflower bg-white px-4 py-2.5 text-lucky-point
                       placeholder:text-ship-cove/60 focus:border-lucky-point focus:outline-none
                       focus:ring-2 focus:ring-cornflower">
@@ -35,12 +48,29 @@
         <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-ship-cove">
             Email
         </label>
-        <input type="email" name="email" id="email"
+        <input type="email" name="email" id="email" placeholder="e.g. example@gmail.com"
                value="{{ old('email', $student->email) }}"
                required
                class="mt-2 w-full rounded-lg border border-cornflower bg-white px-4 py-2.5 text-lucky-point
                       placeholder:text-ship-cove/60 focus:border-lucky-point focus:outline-none
                       focus:ring-2 focus:ring-cornflower">
+    </div>
+
+    {{-- Year level --}}
+    <div>
+        <label for="year_level" class="block text-xs font-semibold uppercase tracking-wider text-ship-cove">
+            Year Level
+        </label>
+        <select name="year_level" id="year_level" required
+                class="mt-2 w-full rounded-lg border border-cornflower bg-white px-4 py-2.5 text-lucky-point
+                       focus:border-lucky-point focus:outline-none focus:ring-2 focus:ring-cornflower">
+            <option value="">Select year level</option>
+            @foreach (['1st Year', '2nd Year', '3rd Year', '4th Year'] as $level)
+                <option value="{{ $level }}" @selected(old('year_level', $student->year_level) === $level)>
+                    {{ $level }}
+                </option>
+            @endforeach
+        </select>
     </div>
 
     {{-- Course: the dropdown is built from the courses table --}}

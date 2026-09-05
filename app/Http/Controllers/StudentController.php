@@ -110,6 +110,13 @@ class StudentController extends Controller
     private function validated(Request $request, ?Student $student = null): array
     {
         return $request->validate([
+            'student_number' => [
+                'required',
+                'string',
+                'max:255',
+                // the column is unique, so no two students may share a number
+                Rule::unique('students', 'student_number')->ignore($student),
+            ],
             'name'  => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
@@ -117,11 +124,15 @@ class StudentController extends Controller
                 'max:255',
                 Rule::unique('students', 'email')->ignore($student),
             ],
+            'year_level' => ['required', 'string', 'max:255'],
             // exists: the chosen id must be a real row in the courses table
             'course_id' => ['required', 'integer', Rule::exists('courses', 'id')],
         ], [
-            'course_id.required' => 'Please choose a course.',
-            'course_id.exists'   => 'That course does not exist.',
+            'student_number.required' => 'Please enter a student number.',
+            'student_number.unique'   => 'That student number is already taken.',
+            'year_level.required'     => 'Please choose a year level.',
+            'course_id.required'      => 'Please choose a course.',
+            'course_id.exists'        => 'That course does not exist.',
         ]);
     }
 }
