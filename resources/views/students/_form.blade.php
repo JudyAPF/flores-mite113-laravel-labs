@@ -81,6 +81,7 @@
         <select name="course_id" id="course_id" required
                 class="mt-2 w-full rounded-lg border border-cornflower bg-white px-4 py-2.5 text-lucky-point
                        focus:border-lucky-point focus:outline-none focus:ring-2 focus:ring-cornflower">
+            <option value="">Select course</option>
             @foreach ($courses as $course)
                 <option value="{{ $course->id }}"
                     @selected(old('course_id', $student->course_id) == $course->id)>
