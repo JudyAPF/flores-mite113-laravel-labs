@@ -54,35 +54,6 @@
 
         </div>
 
-        {{-- Where to go next: every other page of the app, one click away. --}}
-        <nav class="border-t border-mystic bg-mystic/50 px-8 py-6">
-            <h2 class="text-xs font-semibold uppercase tracking-wider text-ship-cove">Go to</h2>
-
-            <div class="mt-3 flex flex-wrap gap-3">
-                <a href="{{ route('students.index') }}"
-                   class="rounded-lg bg-lucky-point px-5 py-2.5 text-sm font-semibold text-white
-                          transition hover:bg-ship-cove focus:outline-none focus:ring-2 focus:ring-cornflower">
-                    View All Students
-                </a>
-
-                <a href="{{ route('students.create') }}"
-                   class="rounded-lg border border-lucky-point px-5 py-2.5 text-sm font-semibold text-lucky-point
-                          transition hover:bg-lucky-point hover:text-white focus:outline-none focus:ring-2 focus:ring-cornflower">
-                    Add a Student
-                </a>
-
-                {{-- Only on /profile/{name}, where the profile came from a real
-                     students row and therefore has an id to link to. --}}
-                @if ($studentId)
-                    <a href="{{ route('students.show', $studentId) }}"
-                       class="rounded-lg px-5 py-2.5 text-sm font-semibold text-ship-cove
-                              transition hover:bg-white hover:text-lucky-point">
-                        My Database Record &rarr;
-                    </a>
-                @endif
-            </div>
-        </nav>
-
         <footer class="border-t border-mystic px-8 py-4 text-center text-xs text-ship-cove">
             Route &rarr; Controller &rarr; View &nbsp;&middot;&nbsp;
             <span class="font-medium">{{ Route::currentRouteName() }}</span> &rarr;
