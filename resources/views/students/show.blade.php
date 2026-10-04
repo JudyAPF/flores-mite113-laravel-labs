@@ -57,21 +57,54 @@
                     @endif
                 </dd>
             </div>
+
+            {{-- LAB 4: the owner. Also reached through a belongsTo relationship
+                 (Student::user), which is exactly what StudentPolicy compares
+                 the logged-in user against. --}}
+            <div class="rounded-xl bg-mystic p-4 sm:col-span-2">
+                <dt class="text-xs font-semibold uppercase tracking-wider text-ship-cove">Owner</dt>
+                <dd class="mt-1 text-lg font-semibold">
+                    @if ($student->user)
+                        {{ $student->user->name }}
+                        <span class="font-normal text-ship-cove">&mdash; {{ $student->user->email }}</span>
+                        @if ($student->user_id === Auth::id())
+                            <span class="ml-1 rounded bg-cornflower px-1.5 py-0.5 text-[10px]
+                                         font-bold uppercase tracking-wide text-lucky-point">You</span>
+                        @endif
+                    @else
+                        <span class="font-normal text-ship-cove">Unowned record</span>
+                    @endif
+                </dd>
+            </div>
         </dl>
 
-        <footer class="flex items-center gap-3 border-t border-mystic px-8 py-5">
-            <a href="{{ route('students.edit', $student) }}"
-               class="rounded-lg bg-lucky-point px-5 py-2.5 text-sm font-semibold text-white
-                      transition hover:bg-ship-cove">Edit</a>
+        <footer class="flex flex-wrap items-center gap-3 border-t border-mystic px-8 py-5">
 
-            <form method="POST" action="{{ route('students.destroy', $student) }}"
-                  onsubmit="return confirm('Delete {{ $student->name }}?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit"
-                        class="rounded-lg px-4 py-2.5 text-sm font-medium text-red-600
-                               transition hover:bg-red-50">Delete</button>
-            </form>
+            {{-- Same policy, checked again in a second place. The controller is
+                 the real guard; these blocks just keep the UI honest. --}}
+            @can('update', $student)
+                <a href="{{ route('students.edit', $student) }}"
+                   class="rounded-lg bg-lucky-point px-5 py-2.5 text-sm font-semibold text-white
+                          transition hover:bg-ship-cove">Edit</a>
+            @endcan
+
+            @can('delete', $student)
+                <form method="POST" action="{{ route('students.destroy', $student) }}"
+                      onsubmit="return confirm('Delete {{ $student->name }}?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                            class="rounded-lg px-4 py-2.5 text-sm font-medium text-red-600
+                                   transition hover:bg-red-50">Delete</button>
+                </form>
+            @endcan
+
+            @cannot('update', $student)
+                <p class="text-sm text-ship-cove">
+                    You are viewing someone else's record, so there is nothing to change here.
+                </p>
+            @endcannot
+
         </footer>
 
     </div>

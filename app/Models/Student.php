@@ -14,6 +14,10 @@ class Student extends Model
      * Columns that are allowed to be mass-assigned,
      * e.g. Student::create([...]).
      * Without this, Laravel blocks the insert to protect you.
+     *
+     * NOTE: user_id is deliberately NOT here. The owner must never come from
+     * the form — otherwise a visitor could post user_id=1 and hand themselves
+     * someone else's record. The controller sets it from the session instead.
      */
     protected $fillable = [
         'student_number',
@@ -31,5 +35,15 @@ class Student extends Model
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    /**
+     * LAB 4: the User who created / owns this record.
+     * $student->user gives the owner, or null for an old unowned row.
+     * This is the value StudentPolicy compares against.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
